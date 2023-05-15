@@ -25,6 +25,7 @@ class Index extends React.Component {
                       })}
                   </ul>
                   <nav>
+                  <a href={`/pokemon/new`}> *** Add New *** </a><br></br>
                   <a href={`/`}> *** Home *** </a>
 </nav>
               </div>

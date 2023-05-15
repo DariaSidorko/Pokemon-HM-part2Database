@@ -4,6 +4,9 @@ const app = express();
 
 //const pokemons = require('./models/data');
 
+//near the top, around other app.use() calls
+app.use(express.urlencoded({extended:true}));
+
 app.set('view engine', 'jsx');
 app.engine('jsx', require('jsx-view-engine').createEngine());
 
@@ -35,7 +38,7 @@ app.post('/pokemon', (req, res) => {
     Pokemon.create(req.body, (error, createdPokemon)=>{
       res.send(createdPokemon);
     });
-    res.redirect('/pokemon');
+    res.redirect('/');
 });
 
 // GET put this above your Show route
@@ -55,9 +58,11 @@ app.get('/', (req, res) => {
 
 
 app.get('/pokemon/:id', (req, res) => {
+  Pokemon.findById(req.params.id, (err, foundPokemon)=>{
   res.render('Show', { 
-    pokemons: pokemons[req.params.id],
+    pokemons: foundPokemon,
     // index: req.params.indexOfColorsArray
+});
 });
 });
 
