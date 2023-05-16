@@ -24,9 +24,11 @@ const Pokemon = require('./models/pokemon')
 
 app.get('/pokemon', (req, res)=>{
   Pokemon.find({}, (error, allPokemons)=>{
+    console.log(error)
       res.render('Index', {
           pokemons: allPokemons
       });
+
   });
 });
 
@@ -36,9 +38,10 @@ app.get('/pokemon', (req, res)=>{
 
 app.post('/pokemon', (req, res) => {
     Pokemon.create(req.body, (error, createdPokemon)=>{
-      res.send(createdPokemon);
+      //res.send(createdPokemon);
+      res.redirect('/');
     });
-    res.redirect('/');
+    
 });
 
 // GET put this above your Show route
